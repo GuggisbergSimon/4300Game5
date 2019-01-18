@@ -63,6 +63,11 @@ public class GameManager : MonoBehaviour
 		//todo, set player active
 	}
 
+	public void Death()
+	{
+		//todo define death
+	}
+
 	public void EndGame()
 	{
 		//todo show end panel

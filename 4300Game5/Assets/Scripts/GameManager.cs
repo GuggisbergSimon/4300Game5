@@ -58,6 +58,16 @@ public class GameManager : MonoBehaviour
 		Setup();
 	}
 
+	public void StartGame()
+	{
+		//todo, set player active
+	}
+
+	public void EndGame()
+	{
+		//todo show end panel
+	}
+
 	public void LoadLevel(string nameLevel)
 	{
 		SceneManager.LoadScene(nameLevel);

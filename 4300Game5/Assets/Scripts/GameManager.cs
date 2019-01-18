@@ -4,13 +4,13 @@ using UnityEngine.SceneManagement;
 public class GameManager : MonoBehaviour
 {
 	public static GameManager Instance { get; private set; }
-	private PlayerController player;
+	/*private PlayerController player;
 
 	public PlayerController Player
 	{
 		get => player;
 		set => player = value;
-	}
+	}*/
 
 	private void OnEnable()
 	{
@@ -39,7 +39,7 @@ public class GameManager : MonoBehaviour
 
 	private void Setup()
 	{
-		player = FindObjectOfType<PlayerController>();
+		//player = FindObjectOfType<PlayerController>();
 		//player = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>();
 	}
 

@@ -4,8 +4,9 @@ using UnityEngine;
 
 public class CameraController : MonoBehaviour
 {
-	[SerializeField] private GameObject target;
+	[SerializeField] private GameObject target = null;
 	[SerializeField] private float speedZoom = 7.0f;
+	[SerializeField] private float speedTilt = 7.0f;
 	private Camera myCamera;
 	private float initHeight;
 	private Vector3 initPos;
@@ -36,8 +37,13 @@ public class CameraController : MonoBehaviour
 
 	private void Update()
 	{
-		//todo remove the following line, only for test purposes
+		//todo remove the two following lines, only for test purposes
 		myCamera.fieldOfView += Input.GetAxis("Vertical") * Time.deltaTime * speedZoom;
+		Quaternion targetRot = Quaternion.Euler(0f, 0f, -Input.GetAxisRaw("Horizontal")*90);
+		
+		//Handle the rotation of the camera
+		transform.rotation = Quaternion.RotateTowards(transform.rotation, targetRot, speedTilt * Time.deltaTime);
+		//handle the position on the camera, based on fov
 		transform.position = initPos.x * Vector3.right + initPos.y * Vector3.up +
 		                     Vector3.forward * target.transform.position.z - Vector3.forward *
 		                     DistanceForHeightAndFOV(initHeight, myCamera.fieldOfView);

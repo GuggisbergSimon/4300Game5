@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class movements : MonoBehaviour
 {
-    [SerializeField] private int speed=5;
+    [SerializeField] private int speed = 5;
 
     private GameObject ground;
 

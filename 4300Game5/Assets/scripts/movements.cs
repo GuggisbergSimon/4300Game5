@@ -9,6 +9,7 @@ public class movements : MonoBehaviour
     private GameObject ground;
 
     private bool canMove = true;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -20,7 +21,7 @@ public class movements : MonoBehaviour
     {
         if (canMove)
         {
-            transform.Translate(Input.GetAxis("Horizontal")*Time.deltaTime*speed,0,1);
+            transform.Translate(Input.GetAxis("Horizontal")*Time.deltaTime*speed,0,1*Time.deltaTime*speed);
         }
        
     }

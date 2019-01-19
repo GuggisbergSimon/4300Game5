@@ -7,26 +7,46 @@ public class PlayerController : MonoBehaviour
 	[SerializeField] private float speedForward = 5.0f;
 	[SerializeField] private float speedLateral = 5.0f;
 	[SerializeField] private float timeStopMoving = 2.0f;
+	[SerializeField] private float minForceRandom = 0.1f;
+	[SerializeField] private float maxForceRandom = 2.0f;
 	private GameObject ground;
+	private float horizontalInput = 0.0f;
 	private bool isAlive = true;
 	private bool canMove = true;
+	private bool canInput = true;
 	public bool CanMove => canMove;
 
 	private Rigidbody myRigidBody;
-	public Rigidbody MyRigidBody => myRigidBody;
 
 	private void Start()
 	{
 		myRigidBody = GetComponent<Rigidbody>();
+		if (minForceRandom > maxForceRandom)
+		{
+			minForceRandom = maxForceRandom;
+		}
+		else if (maxForceRandom < minForceRandom)
+		{
+			maxForceRandom = minForceRandom;
+		}
 	}
 
-	
-
-	void Update()
+	private void FixedUpdate()
 	{
 		if (canMove)
 		{
-			transform.Translate(Input.GetAxis("Horizontal") * Time.deltaTime * speedLateral, 0, Time.deltaTime * speedForward);
+			myRigidBody.velocity = new Vector3(speedLateral * horizontalInput, myRigidBody.velocity.y,
+				speedForward * Mathf.Sign(transform.forward.z));
+			Destabilize();
+		}
+	}
+
+	void Update()
+	{
+		if (canInput)
+		{
+			horizontalInput = Input.GetAxis("Horizontal");
+			//transform.Translate(Input.GetAxis("Horizontal") * Time.deltaTime * speedLateral, 0, Time.deltaTime * speedForward);
 		}
 	}
 
@@ -36,6 +56,17 @@ public class PlayerController : MonoBehaviour
 		{
 			canMove = true;
 		}
+	}
+
+	void Destabilize()
+	{
+		float pos = transform.position.x;
+		if (pos.CompareTo(0) == 0)
+		{
+			pos *= Mathf.Pow(-1.0f, Random.Range(0, 1));
+		}
+
+		myRigidBody.AddForce(Vector3.right * Time.timeSinceLevelLoad * Mathf.Sign(pos) * Random.Range(minForceRandom, maxForceRandom));
 	}
 
 	private void OnCollisionExit(Collision other)
@@ -59,11 +90,17 @@ public class PlayerController : MonoBehaviour
 
 	public IEnumerator StopMoving()
 	{
+		minForceRandom = 0.0f;
+		maxForceRandom = 0.0f;
+		canInput = false;
+		horizontalInput = 0.0f;
+		myRigidBody.velocity = Vector3.zero;
+		float initSpeed = speedForward;
 		float timer = 0.0f;
 		while (timer < timeStopMoving)
 		{
 			timer += Time.deltaTime;
-			speedForward = Mathf.Lerp(speedForward, 0.0f, timer / timeStopMoving);
+			speedForward = Mathf.Lerp(initSpeed, 0.0f, timer / timeStopMoving);
 			yield return null;
 		}
 

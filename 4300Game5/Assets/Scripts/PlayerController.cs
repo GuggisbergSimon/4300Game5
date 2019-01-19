@@ -4,42 +4,69 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-    [SerializeField] private float speedForward = 5.0f;
-    [SerializeField] private float speedLateral = 5.0f;
+	[SerializeField] private float speedForward = 5.0f;
+	[SerializeField] private float speedLateral = 5.0f;
+	[SerializeField] private float timeStopMoving = 2.0f;
+	private GameObject ground;
+	private bool isAlive = true;
+	private bool canMove = true;
+	public bool CanMove => canMove;
 
-    private GameObject ground;
+	private Rigidbody myRigidBody;
+	public Rigidbody MyRigidBody => myRigidBody;
 
-    private bool canMove = true;
+	private void Start()
+	{
+		myRigidBody = GetComponent<Rigidbody>();
+	}
 
-    // Update is called once per frame
-    void Update()
-    {
-        if (canMove)
-        {
-            transform.Translate(Input.GetAxis("Horizontal")*Time.deltaTime*speedLateral,0,1*Time.deltaTime*speedForward);
-        }
-       
-    }
+	
 
-    private void OnCollisionEnter(Collision other)
-    {
-        if (other.gameObject.tag == "Ground")
-        {
-            canMove = true;
-        }
-    }
+	void Update()
+	{
+		if (canMove)
+		{
+			transform.Translate(Input.GetAxis("Horizontal") * Time.deltaTime * speedLateral, 0, Time.deltaTime * speedForward);
+		}
+	}
 
-    private void OnCollisionExit(Collision other)
-    {
-        if (other.gameObject.tag == "Ground")
-        {
-            canMove = false;
-        }
-    }
+	private void OnCollisionEnter(Collision other)
+	{
+		if (other.gameObject.CompareTag("Ground"))
+		{
+			canMove = true;
+		}
+	}
 
-    public IEnumerator StopMoving(float time)
-    {
-        //speedForward=
-        yield return null;
-    }
+	private void OnCollisionExit(Collision other)
+	{
+		if (other.gameObject.CompareTag("Ground"))
+		{
+			canMove = false;
+		}
+	}
+
+	public void Die()
+	{
+		if (isAlive)
+		{
+			isAlive = false;
+			canMove = false;
+			myRigidBody.velocity = Vector3.zero;
+			Destroy(myRigidBody);
+		}
+	}
+
+	public IEnumerator StopMoving()
+	{
+		float timer = 0.0f;
+		while (timer < timeStopMoving)
+		{
+			timer += Time.deltaTime;
+			speedForward = Mathf.Lerp(speedForward, 0.0f, timer / timeStopMoving);
+			yield return null;
+		}
+
+		speedForward = 0.0f;
+	}
 }

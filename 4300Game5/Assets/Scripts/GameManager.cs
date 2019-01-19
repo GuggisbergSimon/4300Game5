@@ -5,7 +5,7 @@ public class GameManager : MonoBehaviour
 {
 	public static GameManager Instance { get; private set; }
 	private PlayerController player;
-
+	
 	public PlayerController Player
 	{
 		get => player;
@@ -65,11 +65,13 @@ public class GameManager : MonoBehaviour
 
 	public void Death()
 	{
-		//todo define death
+		player.Die();	
+		//todo show death panel
 	}
 
 	public void EndGame()
 	{
+		StartCoroutine(player.StopMoving());
 		//todo show end panel
 	}
 

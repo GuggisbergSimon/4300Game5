@@ -2,26 +2,21 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class movements : MonoBehaviour
+public class PlayerController : MonoBehaviour
 {
-    [SerializeField] private int speed=5;
+    [SerializeField] private float speedForward = 5.0f;
+    [SerializeField] private float speedLateral = 5.0f;
 
     private GameObject ground;
 
     private bool canMove = true;
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
 
     // Update is called once per frame
     void Update()
     {
         if (canMove)
         {
-            transform.Translate(Input.GetAxis("Horizontal")*Time.deltaTime*speed,0,1*Time.deltaTime*speed);
+            transform.Translate(Input.GetAxis("Horizontal")*Time.deltaTime*speedLateral,0,1*Time.deltaTime*speedForward);
         }
        
     }
@@ -32,7 +27,6 @@ public class movements : MonoBehaviour
         {
             canMove = true;
         }
-        
     }
 
     private void OnCollisionExit(Collision other)
@@ -41,5 +35,11 @@ public class movements : MonoBehaviour
         {
             canMove = false;
         }
+    }
+
+    public IEnumerator StopMoving(float time)
+    {
+        //speedForward=
+        yield return null;
     }
 }

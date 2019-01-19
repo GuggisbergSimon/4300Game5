@@ -65,11 +65,13 @@ public class GameManager : MonoBehaviour
 
 	public void Death()
 	{
-		//todo define death
+		player.Die();		
+		//todo show death panel
 	}
 
 	public void EndGame()
 	{
+		StartCoroutine(player.StopMoving(2.0f));
 		//todo show end panel
 	}
 

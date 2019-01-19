@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: d66d00b4256d5484f9c05eecac6ff50d
+guid: fafa59f14e642b542a17aca56d76e4fc
 ModelImporter:
   serializedVersion: 23
   fileIDToRecycleName:
@@ -8,7 +8,7 @@ ModelImporter:
     2100000: No Name
     2300000: //RootNode
     3300000: //RootNode
-    4300000: pont_01
+    4300000: pont_variante_01
   externalObjects: {}
   materials:
     importMaterials: 1

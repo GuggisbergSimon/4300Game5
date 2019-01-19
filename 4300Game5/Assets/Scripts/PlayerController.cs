@@ -27,7 +27,6 @@ public class PlayerController : MonoBehaviour
         {
             canMove = true;
         }
-        
     }
 
     private void OnCollisionExit(Collision other)
@@ -36,5 +35,11 @@ public class PlayerController : MonoBehaviour
         {
             canMove = false;
         }
+    }
+
+    public IEnumerator StopMoving(float time)
+    {
+        //speedForward=
+        yield return null;
     }
 }

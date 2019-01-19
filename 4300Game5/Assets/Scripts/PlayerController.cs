@@ -6,29 +6,33 @@ public class PlayerController : MonoBehaviour
 {
 	[SerializeField] private float speedForward = 5.0f;
 	[SerializeField] private float speedLateral = 5.0f;
-	private const float MIN_SPEED_THRESHOLD = 0.1f;
+	[SerializeField] private float timeStopMoving = 2.0f;
 	private GameObject ground;
-	private bool canMove = true;
 	private bool isAlive = true;
-	private Rigidbody myRigidbody;
+	private bool canMove = true;
+	public bool CanMove => canMove;
+
+	private Rigidbody myRigidBody;
+	public Rigidbody MyRigidBody => myRigidBody;
 
 	private void Start()
 	{
-		myRigidbody = GetComponent<Rigidbody>();
+		myRigidBody = GetComponent<Rigidbody>();
 	}
+
+	
 
 	void Update()
 	{
 		if (canMove)
 		{
-			transform.Translate(Input.GetAxis("Horizontal") * Time.deltaTime * speedLateral, 0,
-				1 * Time.deltaTime * speedForward);
+			transform.Translate(Input.GetAxis("Horizontal") * Time.deltaTime * speedLateral, 0, Time.deltaTime * speedForward);
 		}
 	}
 
 	private void OnCollisionEnter(Collision other)
 	{
-		if (other.gameObject.tag == "Ground")
+		if (other.gameObject.CompareTag("Ground"))
 		{
 			canMove = true;
 		}
@@ -36,7 +40,7 @@ public class PlayerController : MonoBehaviour
 
 	private void OnCollisionExit(Collision other)
 	{
-		if (other.gameObject.tag == "Ground")
+		if (other.gameObject.CompareTag("Ground"))
 		{
 			canMove = false;
 		}
@@ -48,16 +52,18 @@ public class PlayerController : MonoBehaviour
 		{
 			isAlive = false;
 			canMove = false;
-			myRigidbody.velocity = Vector3.zero;
-			Destroy(myRigidbody);
+			myRigidBody.velocity = Vector3.zero;
+			Destroy(myRigidBody);
 		}
 	}
 
-	public IEnumerator StopMoving(float time)
+	public IEnumerator StopMoving()
 	{
-		while (speedForward > MIN_SPEED_THRESHOLD)
+		float timer = 0.0f;
+		while (timer < timeStopMoving)
 		{
-			speedForward = Mathf.Lerp(speedForward, 0.0f, Time.deltaTime);
+			timer += Time.deltaTime;
+			speedForward = Mathf.Lerp(speedForward, 0.0f, timer / timeStopMoving);
 			yield return null;
 		}
 

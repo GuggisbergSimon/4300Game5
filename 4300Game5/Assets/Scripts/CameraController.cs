@@ -43,6 +43,12 @@ public class CameraController : MonoBehaviour
 
 	private void Update()
 	{
+		ApplyFOV();
+		ApplyRotation();
+	}
+
+	void ApplyFOV()
+	{
 		float FOV = initFOV + Mathf.Pow(transform.position.x, 2.0f) * speedZoom;
 		if (FOV < limitAngleFOV)
 		{
@@ -51,7 +57,10 @@ public class CameraController : MonoBehaviour
 			                          (distanceDollyStart -
 			                           DistanceForHeightAndFOV(initFrustumHeight, myCamera.fieldOfView));
 		}
+	}
 
+	private void ApplyRotation()
+	{
 		float tilt = transform.position.x * speedTilt;
 		if (tilt < limitAngleTilt)
 		{

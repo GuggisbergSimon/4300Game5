@@ -51,8 +51,8 @@ MonoBehaviour:
   speedForward: 2
   speedLateral: 5
   timeStopMoving: 2
-  minForceRandom: 40
-  maxForceRandom: 80
+  minForceRandom: 1
+  maxForceRandom: 10
 --- !u!33 &1323892020743130036
 MeshFilter:
   m_ObjectHideFlags: 0

@@ -13,6 +13,7 @@ public class PlayerController : MonoBehaviour
 	private float horizontalInput = 0.0f;
 	private bool isAlive = true;
 	private bool canMove = true;
+	private bool canInput = true;
 	public bool CanMove => canMove;
 
 	private Rigidbody myRigidBody;
@@ -20,7 +21,7 @@ public class PlayerController : MonoBehaviour
 	private void Start()
 	{
 		myRigidBody = GetComponent<Rigidbody>();
-		if (minForceRandom>maxForceRandom)
+		if (minForceRandom > maxForceRandom)
 		{
 			minForceRandom = maxForceRandom;
 		}
@@ -36,16 +37,16 @@ public class PlayerController : MonoBehaviour
 		{
 			myRigidBody.velocity = new Vector3(speedLateral * horizontalInput, myRigidBody.velocity.y,
 				speedForward * Mathf.Sign(transform.forward.z));
+			Destabilize();
 		}
 	}
 
 	void Update()
 	{
-		if (canMove)
+		if (canInput)
 		{
 			horizontalInput = Input.GetAxis("Horizontal");
 			//transform.Translate(Input.GetAxis("Horizontal") * Time.deltaTime * speedLateral, 0, Time.deltaTime * speedForward);
-			Destabilize();
 		}
 	}
 
@@ -64,7 +65,8 @@ public class PlayerController : MonoBehaviour
 		{
 			pos *= Mathf.Pow(-1.0f, Random.Range(0, 1));
 		}
-		myRigidBody.AddForce(Vector3.right * Mathf.Sign(pos) * Random.Range(minForceRandom,maxForceRandom));
+
+		myRigidBody.AddForce(Vector3.right * Time.timeSinceLevelLoad * Mathf.Sign(pos) * Random.Range(minForceRandom, maxForceRandom));
 	}
 
 	private void OnCollisionExit(Collision other)
@@ -88,6 +90,11 @@ public class PlayerController : MonoBehaviour
 
 	public IEnumerator StopMoving()
 	{
+		minForceRandom = 0.0f;
+		maxForceRandom = 0.0f;
+		canInput = false;
+		horizontalInput = 0.0f;
+		myRigidBody.velocity = Vector3.zero;
 		float initSpeed = speedForward;
 		float timer = 0.0f;
 		while (timer < timeStopMoving)

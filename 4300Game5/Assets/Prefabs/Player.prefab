@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1323892020743130026}
-  - component: {fileID: 1323892020743130037}
+  - component: {fileID: 5776421495776422640}
   - component: {fileID: 1323892020743130036}
   - component: {fileID: 1323892020743130039}
   - component: {fileID: 1323892020743130033}
@@ -36,7 +36,7 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1323892020743130037
+--- !u!114 &5776421495776422640
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -45,14 +45,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 1323892020743130032}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1a65fafe0a1c7c044b9c553d1b0990b8, type: 3}
+  m_Script: {fileID: 11500000, guid: 1ca28fa525295ec46a402fa939f10664, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speedForward: 2
+  speedForward: 3
   speedLateral: 5
   timeStopMoving: 2
-  minForceRandom: 1
-  maxForceRandom: 10
+  minForceRandom: 0.5
+  maxForceRandom: 8
 --- !u!33 &1323892020743130036
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -68,7 +68,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1323892020743130032}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -157,7 +157,7 @@ PrefabInstance:
     - target: {fileID: 2955585172500882460, guid: 5e6cb338aaf4cb2458d494e7c3e26d3c,
         type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0.15212336
+      value: 0.19080894
       objectReference: {fileID: 0}
     - target: {fileID: 2955585172500882460, guid: 5e6cb338aaf4cb2458d494e7c3e26d3c,
         type: 3}
@@ -172,7 +172,7 @@ PrefabInstance:
     - target: {fileID: 2955585172500882460, guid: 5e6cb338aaf4cb2458d494e7c3e26d3c,
         type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0.98836154
+      value: 0.9816273
       objectReference: {fileID: 0}
     - target: {fileID: 2955585172500882460, guid: 5e6cb338aaf4cb2458d494e7c3e26d3c,
         type: 3}
@@ -182,7 +182,7 @@ PrefabInstance:
     - target: {fileID: 2955585172500882460, guid: 5e6cb338aaf4cb2458d494e7c3e26d3c,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
-      value: 17.5
+      value: 22
       objectReference: {fileID: 0}
     - target: {fileID: 2955585172500882460, guid: 5e6cb338aaf4cb2458d494e7c3e26d3c,
         type: 3}
@@ -218,6 +218,21 @@ PrefabInstance:
         type: 3}
       propertyPath: m_BackGroundColor.a
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2955585172500882658, guid: 5e6cb338aaf4cb2458d494e7c3e26d3c,
+        type: 3}
+      propertyPath: distanceDollyStart
+      value: 0.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2955585172500882658, guid: 5e6cb338aaf4cb2458d494e7c3e26d3c,
+        type: 3}
+      propertyPath: limitAngleFOV
+      value: 150
+      objectReference: {fileID: 0}
+    - target: {fileID: 2955585172500882658, guid: 5e6cb338aaf4cb2458d494e7c3e26d3c,
+        type: 3}
+      propertyPath: limitAngleTilt
+      value: 360
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5e6cb338aaf4cb2458d494e7c3e26d3c, type: 3}

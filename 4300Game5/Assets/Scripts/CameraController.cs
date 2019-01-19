@@ -7,7 +7,7 @@ public class CameraController : MonoBehaviour
 	//[SerializeField] private GameObject target = null;
 	[SerializeField, Range(0.1f, 100.0f)] private float distanceDollyStart = 10.0f;
 	[SerializeField, Range(0.1f, 179.0f)] private float limitAngleFOV = 90.0f;
-	[SerializeField, Range(0.1f, 90.0f)] private float limitAngleTilt = 45.0f;
+	[SerializeField, Range(0.1f, 360.0f)] private float limitAngleTilt = 45.0f;
 	[SerializeField] private float speedZoom = 7.0f;
 	[SerializeField] private float speedTilt = 7.0f;
 	private Camera myCamera;

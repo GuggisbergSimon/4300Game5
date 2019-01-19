@@ -12,8 +12,8 @@ GameObject:
   - component: {fileID: 1323892020743130037}
   - component: {fileID: 1323892020743130036}
   - component: {fileID: 1323892020743130039}
-  - component: {fileID: 1323892020743130038}
   - component: {fileID: 1323892020743130033}
+  - component: {fileID: 1163569773}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -49,8 +49,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speedForward: 2
-  speedLateral: 1
-  timeStopMoving: 10
+  speedLateral: 5
+  timeStopMoving: 2
 --- !u!33 &1323892020743130036
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -96,19 +96,6 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!65 &1323892020743130038
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1323892020743130032}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!54 &1323892020743130033
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -123,8 +110,21 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 0
+  m_Constraints: 112
   m_CollisionDetection: 0
+--- !u!135 &1163569773
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1323892020743130032}
+  m_Material: {fileID: 13400000, guid: 18fe02fd85e0ac34289171d30cd2727a, type: 2}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.5
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1001 &4277067010872258169
 PrefabInstance:
   m_ObjectHideFlags: 0

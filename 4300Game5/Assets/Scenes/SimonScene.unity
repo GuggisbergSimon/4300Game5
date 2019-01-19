@@ -179,6 +179,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1807421069, guid: 948e0b89d4035cd4caf4df3d1b0feee3, type: 3}
+      propertyPath: m_Material
+      value: 
+      objectReference: {fileID: 13400000, guid: 18fe02fd85e0ac34289171d30cd2727a,
+        type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 948e0b89d4035cd4caf4df3d1b0feee3, type: 3}
 --- !u!1 &728321201
@@ -1028,27 +1033,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1323892020743130037, guid: 8ad20744b8124c44e80bb9f7324ae73e,
-        type: 3}
-      propertyPath: timeStopMoving
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 1323892020743130037, guid: 8ad20744b8124c44e80bb9f7324ae73e,
-        type: 3}
-      propertyPath: speedForward
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1323892020743130038, guid: 8ad20744b8124c44e80bb9f7324ae73e,
-        type: 3}
-      propertyPath: m_Material
-      value: 
-      objectReference: {fileID: 13400000, guid: 18fe02fd85e0ac34289171d30cd2727a,
-        type: 2}
-    - target: {fileID: 1323892020743130033, guid: 8ad20744b8124c44e80bb9f7324ae73e,
-        type: 3}
-      propertyPath: m_Constraints
-      value: 48
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8ad20744b8124c44e80bb9f7324ae73e, type: 3}

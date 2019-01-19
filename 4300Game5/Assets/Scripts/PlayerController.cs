@@ -8,25 +8,32 @@ public class PlayerController : MonoBehaviour
 	[SerializeField] private float speedLateral = 5.0f;
 	[SerializeField] private float timeStopMoving = 2.0f;
 	private GameObject ground;
+	private float horizontalInput = 0.0f;
 	private bool isAlive = true;
 	private bool canMove = true;
 	public bool CanMove => canMove;
 
 	private Rigidbody myRigidBody;
-	public Rigidbody MyRigidBody => myRigidBody;
 
 	private void Start()
 	{
 		myRigidBody = GetComponent<Rigidbody>();
 	}
 
-	
+	private void FixedUpdate()
+	{
+		if (canMove)
+		{
+			myRigidBody.velocity = new Vector3(speedLateral*horizontalInput, myRigidBody.velocity.y, speedForward);
+		}
+	}
 
 	void Update()
 	{
 		if (canMove)
 		{
-			transform.Translate(Input.GetAxis("Horizontal") * Time.deltaTime * speedLateral, 0, Time.deltaTime * speedForward);
+			horizontalInput = Input.GetAxis("Horizontal");
+			//transform.Translate(Input.GetAxis("Horizontal") * Time.deltaTime * speedLateral, 0, Time.deltaTime * speedForward);
 		}
 	}
 
@@ -38,13 +45,13 @@ public class PlayerController : MonoBehaviour
 		}
 	}
 
-	private void OnCollisionExit(Collision other)
+	/*private void OnCollisionExit(Collision other)
 	{
 		if (other.gameObject.CompareTag("Ground"))
 		{
 			canMove = false;
 		}
-	}
+	}*/
 
 	public void Die()
 	{

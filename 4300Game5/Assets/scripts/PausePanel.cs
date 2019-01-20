@@ -34,5 +34,6 @@ public class PausePanel : MonoBehaviour
     public void Menu()
     {
         SceneManager.LoadScene("SimonScene");
+        Time.timeScale = 1f;
     }
 }

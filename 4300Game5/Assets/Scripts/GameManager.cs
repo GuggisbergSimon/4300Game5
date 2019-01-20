@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using UnityEngine;
+using UnityEngine.Rendering.PostProcessing;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
@@ -10,6 +11,8 @@ public class GameManager : MonoBehaviour
 	[SerializeField] private GameObject deathPanel = null;
 	[SerializeField] private GameObject endPanel = null;
 	[SerializeField] private GameObject darkPanel = null;
+	[SerializeField] private GameObject postProcessVolumeDof = null;
+	[SerializeField] private float timeDofOff = 2.0f;
 
 	public PlayerController Player
 	{
@@ -67,6 +70,7 @@ public class GameManager : MonoBehaviour
 
 	public void StartGame()
 	{
+		StartCoroutine(DecreaseWeightPPV(postProcessVolumeDof.GetComponent<PostProcessVolume>(),0.0f,timeDofOff));
 		player.CanMove = true;
 	}
 
@@ -89,6 +93,18 @@ public class GameManager : MonoBehaviour
 		while (timer < time)
 		{
 			darkImage.color = new Color(0.0f, 0.0f, 0.0f, Mathf.Lerp(0.0f, 1.0f, timer / time));
+			timer += Time.deltaTime;
+			yield return null;
+		}
+	}
+
+	private IEnumerator DecreaseWeightPPV(PostProcessVolume volume, float value, float time)
+	{
+		float timer = 0.0f;
+		float initWeight = volume.weight;
+		while (timer < time)
+		{
+			volume.weight = Mathf.Lerp(initWeight, value, timer/time);
 			timer += Time.deltaTime;
 			yield return null;
 		}

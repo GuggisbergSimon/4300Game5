@@ -78,7 +78,8 @@ public class PlayerController : MonoBehaviour
 		if (isTouching.Contains(other))
 		{
 			isTouching.Remove(other);
-			if (isTouching.Count == 0 && other.gameObject.CompareTag("Ground") && Mathf.Abs(myRigidBody.velocity.y)>0.001f)
+			if (isTouching.Count == 0 && other.gameObject.CompareTag("Ground") &&
+			    Mathf.Abs(myRigidBody.velocity.y) > 0.001f)
 			{
 				Falling();
 			}
@@ -143,10 +144,13 @@ public class PlayerController : MonoBehaviour
 		horizontalInput = 0.0f;
 		myRigidBody.velocity = Vector3.zero;
 		float initSpeed = speedForward;
+		Vector3 initPos = transform.position;
 		float timer = 0.0f;
 		while (timer < timeStopMoving)
 		{
 			timer += Time.deltaTime;
+			transform.position = Vector3.up * transform.position.y + Vector3.forward * transform.position.z +
+			                     Vector3.right * Mathf.Lerp(initPos.x, 0.0f, timer / timeStopMoving);
 			speedForward = Mathf.Lerp(initSpeed, 0.0f, timer / timeStopMoving);
 			yield return null;
 		}

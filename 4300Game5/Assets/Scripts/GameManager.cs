@@ -57,7 +57,8 @@ public class GameManager : MonoBehaviour
 		else
 		{
 			Instance = this;
-			DontDestroyOnLoad(gameObject);
+			//because we are doing everything on a single scene
+			//DontDestroyOnLoad(gameObject);
 		}
 
 		Setup();

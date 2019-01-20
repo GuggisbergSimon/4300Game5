@@ -20,6 +20,7 @@ public class PlayerController : MonoBehaviour
 	private bool canMove = false;
 	private bool canInput = true;
 	private AudioSource myAudioSource;
+	private TriggerDetector myTriggerDetector;
 	private float timeOutOfMenu = 0.0f;
 	private List<Collision> isTouching = new List<Collision>();
 
@@ -33,6 +34,7 @@ public class PlayerController : MonoBehaviour
 
 	private void Start()
 	{
+		myTriggerDetector = GetComponentInChildren<TriggerDetector>();
 		myRigidBody = GetComponent<Rigidbody>();
 		myAudioSource = GetComponent<AudioSource>();
 		if (minForceRandom > maxForceRandom)
@@ -49,6 +51,11 @@ public class PlayerController : MonoBehaviour
 	{
 		if (canMove)
 		{
+			if (!myTriggerDetector.isTouchingAnything())
+			{
+				Falling();
+				return;
+			}
 			myRigidBody.velocity = new Vector3(speedLateral * horizontalInput, myRigidBody.velocity.y,
 				speedForward * Mathf.Sign(transform.forward.z));
 			timeOutOfMenu += Time.deltaTime;
@@ -61,7 +68,6 @@ public class PlayerController : MonoBehaviour
 		if (canInput)
 		{
 			horizontalInput = Input.GetAxis("Horizontal");
-			//transform.Translate(Input.GetAxis("Horizontal") * Time.deltaTime * speedLateral, 0, Time.deltaTime * speedForward);
 		}
 	}
 

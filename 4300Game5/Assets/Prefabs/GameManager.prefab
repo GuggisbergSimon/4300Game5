@@ -43,3 +43,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b72cf54497df57e4da0f3139db9bffc0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  deathPanel: {fileID: 0}
+  endPanel: {fileID: 0}
+  darkPanel: {fileID: 0}

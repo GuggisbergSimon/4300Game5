@@ -1,22 +1,33 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Audio;
 
 public class PlayerController : MonoBehaviour
 {
 	[SerializeField] private float speedForward = 5.0f;
 	[SerializeField] private float speedLateral = 5.0f;
 	[SerializeField] private float timeStopMoving = 2.0f;
+	[SerializeField] private float timeFadingToBlack = 3.0f;
 	[SerializeField] private float minForceRandom = 0.1f;
 	[SerializeField] private float maxForceRandom = 2.0f;
 	[SerializeField] private AudioClip[] stepSounds = null;
+	[SerializeField] private AudioClip fallingSound = null;
+	[SerializeField] private AudioClip[] splatSounds = null;
 	private GameObject ground;
 	private float horizontalInput = 0.0f;
 	private bool isAlive = true;
-	private bool canMove = true;
+	private bool canMove = false;
 	private bool canInput = true;
 	private AudioSource myAudioSource;
-	public bool CanMove => canMove;
+	private float timeOutOfMenu = 0.0f;
+	private List<Collision> isTouching = new List<Collision>();
+
+	public bool CanMove
+	{
+		get => canMove;
+		set => canMove = value;
+	}
 
 	private Rigidbody myRigidBody;
 
@@ -24,7 +35,6 @@ public class PlayerController : MonoBehaviour
 	{
 		myRigidBody = GetComponent<Rigidbody>();
 		myAudioSource = GetComponent<AudioSource>();
-		StartCoroutine(PlayStepSound());
 		if (minForceRandom > maxForceRandom)
 		{
 			minForceRandom = maxForceRandom;
@@ -41,6 +51,7 @@ public class PlayerController : MonoBehaviour
 		{
 			myRigidBody.velocity = new Vector3(speedLateral * horizontalInput, myRigidBody.velocity.y,
 				speedForward * Mathf.Sign(transform.forward.z));
+			timeOutOfMenu += Time.deltaTime;
 			Destabilize();
 		}
 	}
@@ -56,10 +67,31 @@ public class PlayerController : MonoBehaviour
 
 	private void OnCollisionEnter(Collision other)
 	{
-		if (other.gameObject.CompareTag("Ground"))
+		if (!isTouching.Contains(other))
 		{
-			canMove = true;
+			isTouching.Add(other);
 		}
+	}
+
+	private void OnCollisionExit(Collision other)
+	{
+		if (isTouching.Contains(other))
+		{
+			isTouching.Remove(other);
+			if (isTouching.Count == 0 && other.gameObject.CompareTag("Ground") && Mathf.Abs(myRigidBody.velocity.y)>0.001f)
+			{
+				Falling();
+			}
+		}
+	}
+
+	private void Falling()
+	{
+		canMove = false;
+		StartCoroutine(GameManager.Instance.FadeToBlack(timeFadingToBlack));
+		myAudioSource.clip = fallingSound;
+		myAudioSource.loop = true;
+		myAudioSource.Play();
 	}
 
 	private IEnumerator PlayStepSound()
@@ -67,7 +99,8 @@ public class PlayerController : MonoBehaviour
 		while (canMove)
 		{
 			myAudioSource.PlayOneShot(stepSounds[Random.Range(0, stepSounds.Length)]);
-			if (myRigidBody.velocity.z.CompareTo(0)!=0){
+			if (myRigidBody.velocity.z.CompareTo(0) != 0)
+			{
 				yield return new WaitForSeconds(Mathf.Sqrt(2) / myRigidBody.velocity.z);
 			}
 			else
@@ -85,16 +118,8 @@ public class PlayerController : MonoBehaviour
 			pos *= Mathf.Pow(-1.0f, Random.Range(0, 1));
 		}
 
-		myRigidBody.AddForce(Vector3.right * Time.timeSinceLevelLoad * Mathf.Sign(pos) *
+		myRigidBody.AddForce(Vector3.right * timeOutOfMenu * Mathf.Sign(pos) *
 		                     Random.Range(minForceRandom, maxForceRandom));
-	}
-
-	private void OnCollisionExit(Collision other)
-	{
-		if (other.gameObject.CompareTag("Ground"))
-		{
-			canMove = false;
-		}
 	}
 
 	public void Die()
@@ -105,6 +130,8 @@ public class PlayerController : MonoBehaviour
 			canMove = false;
 			myRigidBody.velocity = Vector3.zero;
 			Destroy(myRigidBody);
+			myAudioSource.Stop();
+			myAudioSource.PlayOneShot(splatSounds[Random.Range(0, splatSounds.Length)]);
 		}
 	}
 

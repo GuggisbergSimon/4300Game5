@@ -12,7 +12,7 @@ public class GameManager : MonoBehaviour
 	[SerializeField] private GameObject endPanel = null;
 	[SerializeField] private GameObject darkPanel = null;
 	[SerializeField] private GameObject postProcessVolumeDof = null;
-	[SerializeField] private float timeDofOff = 2.0f;
+	[SerializeField] private float timeVisualEffectOnOff = 2.0f;
 
 	public PlayerController Player
 	{
@@ -70,7 +70,7 @@ public class GameManager : MonoBehaviour
 
 	public void StartGame()
 	{
-		StartCoroutine(DecreaseWeightPPV(postProcessVolumeDof.GetComponent<PostProcessVolume>(),0.0f,timeDofOff));
+		StartCoroutine(DecreaseWeightPPV(postProcessVolumeDof.GetComponent<PostProcessVolume>(),0.0f,timeVisualEffectOnOff));
 		player.CanMove = true;
 	}
 
@@ -83,6 +83,7 @@ public class GameManager : MonoBehaviour
 	public void EndGame()
 	{
 		StartCoroutine(player.StopMoving());
+		StartCoroutine(FadeToBlack(timeVisualEffectOnOff));
 		endPanel.SetActive(true);
 	}
 

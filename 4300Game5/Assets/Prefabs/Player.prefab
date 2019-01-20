@@ -223,6 +223,7 @@ MonoBehaviour:
   speedForward: 1
   speedLateral: 5
   timeStopMoving: 2
+  timeFadingToBlack: 3
   minForceRandom: 0.5
   maxForceRandom: 8
   stepSounds:
@@ -312,7 +313,7 @@ AudioSource:
   m_GameObject: {fileID: 1323892020743130032}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 243755715890002770, guid: 36fe7379d08a9974cb8f81dce0c0cb62,
+  OutputAudioMixerGroup: {fileID: 243085026121439804, guid: 36fe7379d08a9974cb8f81dce0c0cb62,
     type: 2}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 0

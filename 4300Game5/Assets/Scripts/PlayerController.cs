@@ -75,7 +75,7 @@ public class PlayerController : MonoBehaviour
 		if (isTouching.Contains(other))
 		{
 			isTouching.Remove(other);
-			if (isTouching.Count == 0 && other.gameObject.CompareTag("Ground"))
+			if (isTouching.Count == 0 && other.gameObject.CompareTag("Ground") && Mathf.Abs(myRigidBody.velocity.y)>0.001f)
 			{
 				canMove = false;
 				StartCoroutine(GameManager.Instance.FadeToBlack(timeFadingToBlack));

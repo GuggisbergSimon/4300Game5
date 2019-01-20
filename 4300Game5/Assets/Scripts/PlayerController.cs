@@ -7,6 +7,7 @@ public class PlayerController : MonoBehaviour
 {
 	[SerializeField] private float speedForward = 5.0f;
 	[SerializeField] private float speedLateral = 5.0f;
+	[SerializeField] private float speedDestabilizing = 0.3f;
 	[SerializeField] private float timeStopMoving = 2.0f;
 	[SerializeField] private float timeFadingToBlack = 3.0f;
 	[SerializeField] private float minForceRandom = 0.1f;
@@ -20,6 +21,7 @@ public class PlayerController : MonoBehaviour
 	private bool canMove = false;
 	private bool canInput = true;
 	private AudioSource myAudioSource;
+	private TriggerDetector myTriggerDetector;
 	private float timeOutOfMenu = 0.0f;
 	private List<Collision> isTouching = new List<Collision>();
 
@@ -33,6 +35,7 @@ public class PlayerController : MonoBehaviour
 
 	private void Start()
 	{
+		myTriggerDetector = GetComponentInChildren<TriggerDetector>();
 		myRigidBody = GetComponent<Rigidbody>();
 		myAudioSource = GetComponent<AudioSource>();
 		if (minForceRandom > maxForceRandom)
@@ -49,6 +52,11 @@ public class PlayerController : MonoBehaviour
 	{
 		if (canMove)
 		{
+			if (!myTriggerDetector.isTouchingAnything())
+			{
+				Falling();
+				return;
+			}
 			myRigidBody.velocity = new Vector3(speedLateral * horizontalInput, myRigidBody.velocity.y,
 				speedForward * Mathf.Sign(transform.forward.z));
 			timeOutOfMenu += Time.deltaTime;
@@ -61,7 +69,6 @@ public class PlayerController : MonoBehaviour
 		if (canInput)
 		{
 			horizontalInput = Input.GetAxis("Horizontal");
-			//transform.Translate(Input.GetAxis("Horizontal") * Time.deltaTime * speedLateral, 0, Time.deltaTime * speedForward);
 		}
 	}
 
@@ -78,7 +85,8 @@ public class PlayerController : MonoBehaviour
 		if (isTouching.Contains(other))
 		{
 			isTouching.Remove(other);
-			if (isTouching.Count == 0 && other.gameObject.CompareTag("Ground") && Mathf.Abs(myRigidBody.velocity.y)>0.001f)
+			if (isTouching.Count == 0 && other.gameObject.CompareTag("Ground") &&
+			    Mathf.Abs(myRigidBody.velocity.y) > 0.001f)
 			{
 				Falling();
 			}
@@ -118,7 +126,7 @@ public class PlayerController : MonoBehaviour
 			pos *= Mathf.Pow(-1.0f, Random.Range(0, 1));
 		}
 
-		myRigidBody.AddForce(Vector3.right * timeOutOfMenu * Mathf.Sign(pos) *
+		myRigidBody.AddForce(Vector3.right * timeOutOfMenu * speedDestabilizing * Mathf.Sign(pos) *
 		                     Random.Range(minForceRandom, maxForceRandom));
 	}
 
@@ -143,10 +151,13 @@ public class PlayerController : MonoBehaviour
 		horizontalInput = 0.0f;
 		myRigidBody.velocity = Vector3.zero;
 		float initSpeed = speedForward;
+		Vector3 initPos = transform.position;
 		float timer = 0.0f;
 		while (timer < timeStopMoving)
 		{
 			timer += Time.deltaTime;
+			transform.position = Vector3.up * transform.position.y + Vector3.forward * transform.position.z +
+			                     Vector3.right * Mathf.Lerp(initPos.x, 0.0f, timer / timeStopMoving);
 			speedForward = Mathf.Lerp(initSpeed, 0.0f, timer / timeStopMoving);
 			yield return null;
 		}

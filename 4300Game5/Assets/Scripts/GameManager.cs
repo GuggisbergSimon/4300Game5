@@ -5,6 +5,8 @@ public class GameManager : MonoBehaviour
 {
 	public static GameManager Instance { get; private set; }
 	private PlayerController player;
+	[SerializeField] private GameObject deathPanel = null;
+	[SerializeField] private GameObject endPanel = null;
 	
 	public PlayerController Player
 	{
@@ -60,19 +62,19 @@ public class GameManager : MonoBehaviour
 
 	public void StartGame()
 	{
-		//todo, set player active
+		player.CanMove = true;
 	}
 
 	public void Death()
 	{
 		player.Die();	
-		//todo show death panel
+		deathPanel.SetActive(true);
 	}
 
 	public void EndGame()
 	{
 		StartCoroutine(player.StopMoving());
-		//todo show end panel
+		endPanel.SetActive(true);
 	}
 
 	public void LoadLevel(string nameLevel)

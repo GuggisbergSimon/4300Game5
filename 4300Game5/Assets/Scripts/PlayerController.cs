@@ -13,10 +13,16 @@ public class PlayerController : MonoBehaviour
 	private GameObject ground;
 	private float horizontalInput = 0.0f;
 	private bool isAlive = true;
-	private bool canMove = true;
+	private bool canMove = false;
 	private bool canInput = true;
 	private AudioSource myAudioSource;
-	public bool CanMove => canMove;
+	private float timeOutOfMenu = 0.0f;
+
+	public bool CanMove
+	{
+		get => canMove;
+		set => canMove = value;
+	}
 
 	private Rigidbody myRigidBody;
 
@@ -24,7 +30,6 @@ public class PlayerController : MonoBehaviour
 	{
 		myRigidBody = GetComponent<Rigidbody>();
 		myAudioSource = GetComponent<AudioSource>();
-		StartCoroutine(PlayStepSound());
 		if (minForceRandom > maxForceRandom)
 		{
 			minForceRandom = maxForceRandom;
@@ -41,6 +46,7 @@ public class PlayerController : MonoBehaviour
 		{
 			myRigidBody.velocity = new Vector3(speedLateral * horizontalInput, myRigidBody.velocity.y,
 				speedForward * Mathf.Sign(transform.forward.z));
+			timeOutOfMenu += Time.deltaTime;
 			Destabilize();
 		}
 	}
@@ -85,7 +91,7 @@ public class PlayerController : MonoBehaviour
 			pos *= Mathf.Pow(-1.0f, Random.Range(0, 1));
 		}
 
-		myRigidBody.AddForce(Vector3.right * Time.timeSinceLevelLoad * Mathf.Sign(pos) *
+		myRigidBody.AddForce(Vector3.right * timeOutOfMenu * Mathf.Sign(pos) *
 		                     Random.Range(minForceRandom, maxForceRandom));
 	}
 

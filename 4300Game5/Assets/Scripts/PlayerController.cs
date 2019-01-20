@@ -17,6 +17,7 @@ public class PlayerController : MonoBehaviour
 	private bool canInput = true;
 	private AudioSource myAudioSource;
 	private float timeOutOfMenu = 0.0f;
+	private List<Collision> isTouching = new List<Collision>();
 
 	public bool CanMove
 	{
@@ -62,9 +63,26 @@ public class PlayerController : MonoBehaviour
 
 	private void OnCollisionEnter(Collision other)
 	{
-		if (other.gameObject.CompareTag("Ground"))
+		if (!isTouching.Contains(other))
+		{
+			isTouching.Add(other);
+		}
+
+		/*if (other.gameObject.CompareTag("Ground"))
 		{
 			canMove = true;
+		}*/
+	}
+
+	private void OnCollisionExit(Collision other)
+	{
+		if (isTouching.Contains(other))
+		{
+			isTouching.Remove(other);
+			if (isTouching.Count == 0 && other.gameObject.CompareTag("Ground"))
+			{
+				canMove = false;
+			}
 		}
 	}
 
@@ -73,7 +91,8 @@ public class PlayerController : MonoBehaviour
 		while (canMove)
 		{
 			myAudioSource.PlayOneShot(stepSounds[Random.Range(0, stepSounds.Length)]);
-			if (myRigidBody.velocity.z.CompareTo(0)!=0){
+			if (myRigidBody.velocity.z.CompareTo(0) != 0)
+			{
 				yield return new WaitForSeconds(Mathf.Sqrt(2) / myRigidBody.velocity.z);
 			}
 			else
@@ -93,14 +112,6 @@ public class PlayerController : MonoBehaviour
 
 		myRigidBody.AddForce(Vector3.right * timeOutOfMenu * Mathf.Sign(pos) *
 		                     Random.Range(minForceRandom, maxForceRandom));
-	}
-
-	private void OnCollisionExit(Collision other)
-	{
-		if (other.gameObject.CompareTag("Ground"))
-		{
-			canMove = false;
-		}
 	}
 
 	public void Die()

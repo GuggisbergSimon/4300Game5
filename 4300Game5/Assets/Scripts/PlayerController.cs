@@ -7,6 +7,7 @@ public class PlayerController : MonoBehaviour
 	[SerializeField] private float speedForward = 5.0f;
 	[SerializeField] private float speedLateral = 5.0f;
 	[SerializeField] private float timeStopMoving = 2.0f;
+	[SerializeField] private float timeFadingToBlack = 3.0f;
 	[SerializeField] private float minForceRandom = 0.1f;
 	[SerializeField] private float maxForceRandom = 2.0f;
 	[SerializeField] private AudioClip[] stepSounds = null;
@@ -67,11 +68,6 @@ public class PlayerController : MonoBehaviour
 		{
 			isTouching.Add(other);
 		}
-
-		/*if (other.gameObject.CompareTag("Ground"))
-		{
-			canMove = true;
-		}*/
 	}
 
 	private void OnCollisionExit(Collision other)
@@ -82,6 +78,7 @@ public class PlayerController : MonoBehaviour
 			if (isTouching.Count == 0 && other.gameObject.CompareTag("Ground"))
 			{
 				canMove = false;
+				StartCoroutine(GameManager.Instance.FadeToBlack(timeFadingToBlack));
 			}
 		}
 	}

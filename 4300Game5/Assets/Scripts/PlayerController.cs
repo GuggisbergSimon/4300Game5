@@ -7,6 +7,7 @@ public class PlayerController : MonoBehaviour
 {
 	[SerializeField] private float speedForward = 5.0f;
 	[SerializeField] private float speedLateral = 5.0f;
+	[SerializeField] private float speedDestabilizing = 0.3f;
 	[SerializeField] private float timeStopMoving = 2.0f;
 	[SerializeField] private float timeFadingToBlack = 3.0f;
 	[SerializeField] private float minForceRandom = 0.1f;
@@ -125,7 +126,7 @@ public class PlayerController : MonoBehaviour
 			pos *= Mathf.Pow(-1.0f, Random.Range(0, 1));
 		}
 
-		myRigidBody.AddForce(Vector3.right * timeOutOfMenu * Mathf.Sign(pos) *
+		myRigidBody.AddForce(Vector3.right * timeOutOfMenu * speedDestabilizing * Mathf.Sign(pos) *
 		                     Random.Range(minForceRandom, maxForceRandom));
 	}
 

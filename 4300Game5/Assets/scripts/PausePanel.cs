@@ -5,7 +5,7 @@ using UnityEngine.SceneManagement;
 
 public class PausePanel : MonoBehaviour
 {
-    [SerializeField] private GameObject ui;
+    [SerializeField] private GameObject pausePanel;
 
     // Update is called once per frame
     void Update()
@@ -18,9 +18,9 @@ public class PausePanel : MonoBehaviour
 
     public void Toggle() // marche pour le bouton "continue"
     {
-        ui.SetActive(!ui.activeSelf); //plus simple pour basculer d'un état à l'autre
+        pausePanel.SetActive(!pausePanel.activeSelf); //plus simple pour basculer d'un état à l'autre
 
-        if (ui.activeSelf)
+        if (pausePanel.activeSelf)
         {
             Time.timeScale = 0f;
         }
@@ -30,15 +30,9 @@ public class PausePanel : MonoBehaviour
         }
     }
 
-    public void Retry()
-    {
-        Toggle(); //être sûr que le temps est arrêter
-        SceneManager.LoadScene("Scenes/Dorian");
-
-    }
 
     public void Menu()
     {
-        SceneManager.LoadScene("Scenes/MainMenu");
+        SceneManager.LoadScene("SimonScene");
     }
 }

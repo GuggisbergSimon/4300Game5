@@ -173,7 +173,7 @@ MonoBehaviour:
   m_Script: {fileID: -619905303, guid: f70555f144d8491a825f0804e09c671c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_FirstSelected: {fileID: 0}
+  m_FirstSelected: {fileID: 2105673655}
   m_sendNavigationEvents: 1
   m_DragThreshold: 10
 --- !u!4 &215480120
@@ -1259,6 +1259,12 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1563888395}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &2105673655 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8006368666044254503, guid: 7e2b948f0aa4f08428b5db304260e826,
+    type: 3}
+  m_PrefabInstance: {fileID: 3285842050196042557}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1323892020490526490
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1284,7 +1290,7 @@ PrefabInstance:
     - target: {fileID: 1323892020743130026, guid: 8ad20744b8124c44e80bb9f7324ae73e,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 39.586
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1323892020743130026, guid: 8ad20744b8124c44e80bb9f7324ae73e,
         type: 3}
@@ -1326,6 +1332,46 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5776421495776422640, guid: 8ad20744b8124c44e80bb9f7324ae73e,
+        type: 3}
+      propertyPath: splatSounds.Array.size
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 5776421495776422640, guid: 8ad20744b8124c44e80bb9f7324ae73e,
+        type: 3}
+      propertyPath: fallingSound
+      value: 
+      objectReference: {fileID: 8300000, guid: 76403b86dd73f794b927eb405eb5ba45, type: 3}
+    - target: {fileID: 5776421495776422640, guid: 8ad20744b8124c44e80bb9f7324ae73e,
+        type: 3}
+      propertyPath: splatSounds.Array.data[0]
+      value: 
+      objectReference: {fileID: 8300000, guid: 0260006e09adeee41b189134a1673138, type: 3}
+    - target: {fileID: 5776421495776422640, guid: 8ad20744b8124c44e80bb9f7324ae73e,
+        type: 3}
+      propertyPath: splatSounds.Array.data[1]
+      value: 
+      objectReference: {fileID: 8300000, guid: ef5ff571a5ca2134a96079b18d44d31c, type: 3}
+    - target: {fileID: 5776421495776422640, guid: 8ad20744b8124c44e80bb9f7324ae73e,
+        type: 3}
+      propertyPath: splatSounds.Array.data[2]
+      value: 
+      objectReference: {fileID: 8300000, guid: 6a03f314feff76d4599c13f302b6f61e, type: 3}
+    - target: {fileID: 5776421495776422640, guid: 8ad20744b8124c44e80bb9f7324ae73e,
+        type: 3}
+      propertyPath: splatSounds.Array.data[3]
+      value: 
+      objectReference: {fileID: 8300000, guid: 3151badcea109164c93b8e818d47bab3, type: 3}
+    - target: {fileID: 5776421495776422640, guid: 8ad20744b8124c44e80bb9f7324ae73e,
+        type: 3}
+      propertyPath: splatSounds.Array.data[4]
+      value: 
+      objectReference: {fileID: 8300000, guid: 59c2a5726de72dd4d84bfdab02857263, type: 3}
+    - target: {fileID: 5776421495776422640, guid: 8ad20744b8124c44e80bb9f7324ae73e,
+        type: 3}
+      propertyPath: splatSounds.Array.data[5]
+      value: 
+      objectReference: {fileID: 8300000, guid: 687d59ea61da4284ca6e0ce630203ded, type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8ad20744b8124c44e80bb9f7324ae73e, type: 3}
 --- !u!1001 &3285842050196042557
@@ -1845,6 +1891,21 @@ PrefabInstance:
       propertyPath: m_Name
       value: GameManager
       objectReference: {fileID: 0}
+    - target: {fileID: 5206169660311953241, guid: d1f35f1dc7fb8724a8937dd42d044858,
+        type: 3}
+      propertyPath: deathPanel
+      value: 
+      objectReference: {fileID: 4324139106804994951}
+    - target: {fileID: 5206169660311953241, guid: d1f35f1dc7fb8724a8937dd42d044858,
+        type: 3}
+      propertyPath: endPanel
+      value: 
+      objectReference: {fileID: 8787326823844627626}
+    - target: {fileID: 5206169660311953241, guid: d1f35f1dc7fb8724a8937dd42d044858,
+        type: 3}
+      propertyPath: darkPanel
+      value: 
+      objectReference: {fileID: 6679482705021278649}
     - target: {fileID: 4954390663490318645, guid: d1f35f1dc7fb8724a8937dd42d044858,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1900,21 +1961,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 5206169660311953241, guid: d1f35f1dc7fb8724a8937dd42d044858,
-        type: 3}
-      propertyPath: deathPanel
-      value: 
-      objectReference: {fileID: 4324139106804994951}
-    - target: {fileID: 5206169660311953241, guid: d1f35f1dc7fb8724a8937dd42d044858,
-        type: 3}
-      propertyPath: endPanel
-      value: 
-      objectReference: {fileID: 8787326823844627626}
-    - target: {fileID: 5206169660311953241, guid: d1f35f1dc7fb8724a8937dd42d044858,
-        type: 3}
-      propertyPath: darkPanel
-      value: 
-      objectReference: {fileID: 6679482705021278649}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d1f35f1dc7fb8724a8937dd42d044858, type: 3}
 --- !u!1 &8787326823844627626 stripped

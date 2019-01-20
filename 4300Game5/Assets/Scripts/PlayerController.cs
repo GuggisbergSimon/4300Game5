@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Audio;
 
 public class PlayerController : MonoBehaviour
 {
@@ -11,6 +12,8 @@ public class PlayerController : MonoBehaviour
 	[SerializeField] private float minForceRandom = 0.1f;
 	[SerializeField] private float maxForceRandom = 2.0f;
 	[SerializeField] private AudioClip[] stepSounds = null;
+	[SerializeField] private AudioClip fallingSound = null;
+	[SerializeField] private AudioClip[] splatSounds = null;
 	private GameObject ground;
 	private float horizontalInput = 0.0f;
 	private bool isAlive = true;
@@ -77,10 +80,18 @@ public class PlayerController : MonoBehaviour
 			isTouching.Remove(other);
 			if (isTouching.Count == 0 && other.gameObject.CompareTag("Ground") && Mathf.Abs(myRigidBody.velocity.y)>0.001f)
 			{
-				canMove = false;
-				StartCoroutine(GameManager.Instance.FadeToBlack(timeFadingToBlack));
+				Falling();
 			}
 		}
+	}
+
+	private void Falling()
+	{
+		canMove = false;
+		StartCoroutine(GameManager.Instance.FadeToBlack(timeFadingToBlack));
+		myAudioSource.clip = fallingSound;
+		myAudioSource.loop = true;
+		myAudioSource.Play();
 	}
 
 	private IEnumerator PlayStepSound()
@@ -119,6 +130,8 @@ public class PlayerController : MonoBehaviour
 			canMove = false;
 			myRigidBody.velocity = Vector3.zero;
 			Destroy(myRigidBody);
+			myAudioSource.Stop();
+			myAudioSource.PlayOneShot(splatSounds[Random.Range(0, splatSounds.Length)]);
 		}
 	}
 

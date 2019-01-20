@@ -9,11 +9,13 @@ public class PlayerController : MonoBehaviour
 	[SerializeField] private float timeStopMoving = 2.0f;
 	[SerializeField] private float minForceRandom = 0.1f;
 	[SerializeField] private float maxForceRandom = 2.0f;
+	[SerializeField] private AudioClip[] stepSounds = null;
 	private GameObject ground;
 	private float horizontalInput = 0.0f;
 	private bool isAlive = true;
 	private bool canMove = true;
 	private bool canInput = true;
+	private AudioSource myAudioSource;
 	public bool CanMove => canMove;
 
 	private Rigidbody myRigidBody;
@@ -21,6 +23,8 @@ public class PlayerController : MonoBehaviour
 	private void Start()
 	{
 		myRigidBody = GetComponent<Rigidbody>();
+		myAudioSource = GetComponent<AudioSource>();
+		StartCoroutine(PlayStepSound());
 		if (minForceRandom > maxForceRandom)
 		{
 			minForceRandom = maxForceRandom;
@@ -58,7 +62,22 @@ public class PlayerController : MonoBehaviour
 		}
 	}
 
-	void Destabilize()
+	private IEnumerator PlayStepSound()
+	{
+		while (canMove)
+		{
+			myAudioSource.PlayOneShot(stepSounds[Random.Range(0, stepSounds.Length)]);
+			if (myRigidBody.velocity.z.CompareTo(0)!=0){
+				yield return new WaitForSeconds(Mathf.Sqrt(2) / myRigidBody.velocity.z);
+			}
+			else
+			{
+				yield return null;
+			}
+		}
+	}
+
+	private void Destabilize()
 	{
 		float pos = transform.position.x;
 		if (pos.CompareTo(0) == 0)
@@ -66,7 +85,8 @@ public class PlayerController : MonoBehaviour
 			pos *= Mathf.Pow(-1.0f, Random.Range(0, 1));
 		}
 
-		myRigidBody.AddForce(Vector3.right * Time.timeSinceLevelLoad * Mathf.Sign(pos) * Random.Range(minForceRandom, maxForceRandom));
+		myRigidBody.AddForce(Vector3.right * Time.timeSinceLevelLoad * Mathf.Sign(pos) *
+		                     Random.Range(minForceRandom, maxForceRandom));
 	}
 
 	private void OnCollisionExit(Collision other)
@@ -104,6 +124,7 @@ public class PlayerController : MonoBehaviour
 			yield return null;
 		}
 
+		canMove = false;
 		speedForward = 0.0f;
 	}
 }

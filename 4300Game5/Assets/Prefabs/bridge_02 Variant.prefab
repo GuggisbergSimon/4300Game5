@@ -38,7 +38,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 735111226897839387}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 1.1, y: 0.5, z: 0}
+  m_LocalPosition: {x: 1.13, y: 0.47, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 199541199503575238}
@@ -56,7 +56,7 @@ Light:
   m_Type: 2
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_Intensity: 1
-  m_Range: 10
+  m_Range: 5
   m_SpotAngle: 30
   m_CookieSize: 10
   m_Shadows:
@@ -77,7 +77,7 @@ Light:
   m_Lightmapping: 4
   m_LightShadowCasterMode: 0
   m_AreaSize: {x: 1, y: 1}
-  m_BounceIntensity: 0
+  m_BounceIntensity: 1
   m_ColorTemperature: 6570
   m_UseColorTemperature: 0
   m_ShadowRadius: 0
@@ -107,7 +107,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 9179779222034334614}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1.1, y: 0.5, z: 0}
+  m_LocalPosition: {x: -1.13, y: 0.47, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 199541199503575238}
@@ -125,7 +125,7 @@ Light:
   m_Type: 2
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_Intensity: 1
-  m_Range: 10
+  m_Range: 5
   m_SpotAngle: 30
   m_CookieSize: 10
   m_Shadows:
@@ -146,7 +146,7 @@ Light:
   m_Lightmapping: 4
   m_LightShadowCasterMode: 0
   m_AreaSize: {x: 1, y: 1}
-  m_BounceIntensity: 0
+  m_BounceIntensity: 1
   m_ColorTemperature: 6570
   m_UseColorTemperature: 0
   m_ShadowRadius: 0
@@ -220,3 +220,69 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 199541199503184454}
   m_PrefabAsset: {fileID: 0}
+--- !u!1001 &4244178153991621113
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 199541199503575238}
+    m_Modifications:
+    - target: {fileID: 100000, guid: 13078f3d663ac4b41a3253976a211e42, type: 3}
+      propertyPath: m_Name
+      value: bridge_pillar_extension (5)
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 13078f3d663ac4b41a3253976a211e42, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 13078f3d663ac4b41a3253976a211e42, type: 3}
+      propertyPath: m_RootOrder
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 13078f3d663ac4b41a3253976a211e42, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 13078f3d663ac4b41a3253976a211e42, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -26.845
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 13078f3d663ac4b41a3253976a211e42, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0.00000010331604
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 13078f3d663ac4b41a3253976a211e42, type: 3}
+--- !u!1001 &7581365173978542931
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 199541199503575238}
+    m_Modifications:
+    - target: {fileID: 100000, guid: 13078f3d663ac4b41a3253976a211e42, type: 3}
+      propertyPath: m_Name
+      value: bridge_pillar_extension (4)
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 13078f3d663ac4b41a3253976a211e42, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 13078f3d663ac4b41a3253976a211e42, type: 3}
+      propertyPath: m_RootOrder
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 13078f3d663ac4b41a3253976a211e42, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 13078f3d663ac4b41a3253976a211e42, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -18.26
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 13078f3d663ac4b41a3253976a211e42, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0.00000010331604
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 13078f3d663ac4b41a3253976a211e42, type: 3}

@@ -58,6 +58,7 @@ public class GameManager : MonoBehaviour
 		{
 			Instance = this;
 			//because we are doing everything on a single scene
+			//todo find a way to referentiate gamemanager in canvas without losing link
 			//DontDestroyOnLoad(gameObject);
 		}
 

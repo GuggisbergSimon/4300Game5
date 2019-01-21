@@ -96,6 +96,7 @@ public class PlayerController : MonoBehaviour
 	private void Falling()
 	{
 		canMove = false;
+		canInput = false;
 		StartCoroutine(GameManager.Instance.FadeToBlack(timeFadingToBlack));
 		myAudioSource.clip = fallingSound;
 		myAudioSource.loop = true;
@@ -104,7 +105,7 @@ public class PlayerController : MonoBehaviour
 
 	private IEnumerator PlayStepSound()
 	{
-		while (canMove)
+		while (canInput)
 		{
 			myAudioSource.PlayOneShot(stepSounds[Random.Range(0, stepSounds.Length)]);
 			if (myRigidBody.velocity.z.CompareTo(0) != 0)

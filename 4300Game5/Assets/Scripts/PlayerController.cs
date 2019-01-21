@@ -28,7 +28,14 @@ public class PlayerController : MonoBehaviour
 	public bool CanMove
 	{
 		get => canMove;
-		set => canMove = value;
+		set
+		{
+			canMove = value;
+			if (canMove)
+			{
+				StartCoroutine(PlayStepSound());
+			}
+		}
 	}
 
 	private Rigidbody myRigidBody;
@@ -57,6 +64,7 @@ public class PlayerController : MonoBehaviour
 				Falling();
 				return;
 			}
+
 			myRigidBody.velocity = new Vector3(speedLateral * horizontalInput, myRigidBody.velocity.y,
 				speedForward * Mathf.Sign(transform.forward.z));
 			timeOutOfMenu += Time.deltaTime;
@@ -86,7 +94,7 @@ public class PlayerController : MonoBehaviour
 		{
 			isTouching.Remove(other);
 			if (isTouching.Count == 0 && other.gameObject.CompareTag("Ground") &&
-			    Mathf.Abs(myRigidBody.velocity.y) > 0.001f)
+				Mathf.Abs(myRigidBody.velocity.y) > 0.001f)
 			{
 				Falling();
 			}
@@ -128,7 +136,7 @@ public class PlayerController : MonoBehaviour
 		}
 
 		myRigidBody.AddForce(Vector3.right * timeOutOfMenu * speedDestabilizing * Mathf.Sign(pos) *
-		                     Random.Range(minForceRandom, maxForceRandom));
+							 Random.Range(minForceRandom, maxForceRandom));
 	}
 
 	public void Die()
@@ -158,7 +166,7 @@ public class PlayerController : MonoBehaviour
 		{
 			timer += Time.deltaTime;
 			transform.position = Vector3.up * transform.position.y + Vector3.forward * transform.position.z +
-			                     Vector3.right * Mathf.Lerp(initPos.x, 0.0f, timer / timeStopMoving);
+								 Vector3.right * Mathf.Lerp(initPos.x, 0.0f, timer / timeStopMoving);
 			speedForward = Mathf.Lerp(initSpeed, 0.0f, timer / timeStopMoving);
 			yield return null;
 		}

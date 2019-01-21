@@ -107,6 +107,7 @@ public class PlayerController : MonoBehaviour
 		canInput = false;
 		StartCoroutine(GameManager.Instance.FadeToBlack(timeFadingToBlack));
 		myAudioSource.clip = fallingSound;
+		myAudioSource.volume = 1.0f;
 		myAudioSource.loop = true;
 		myAudioSource.Play();
 	}
@@ -115,15 +116,17 @@ public class PlayerController : MonoBehaviour
 	{
 		while (canInput)
 		{
-			myAudioSource.PlayOneShot(stepSounds[Random.Range(0, stepSounds.Length)]);
 			if (myRigidBody.velocity.z.CompareTo(0) != 0)
 			{
-				yield return new WaitForSeconds(Mathf.Sqrt(2) / myRigidBody.velocity.z);
+				yield return new WaitForSeconds(1 / myRigidBody.velocity.z);
 			}
 			else
 			{
 				yield return null;
 			}
+
+			myAudioSource.volume = 0.3f;
+			myAudioSource.PlayOneShot(stepSounds[Random.Range(0, stepSounds.Length)]);
 		}
 	}
 

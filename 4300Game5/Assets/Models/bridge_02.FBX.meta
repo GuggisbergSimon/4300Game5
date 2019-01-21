@@ -5,11 +5,22 @@ ModelImporter:
   fileIDToRecycleName:
     100000: //RootNode
     400000: //RootNode
-    2100000: No Name
+    2100000: 'Material #3'
+    2100002: 'Material #4'
     2300000: //RootNode
     3300000: //RootNode
     4300000: pont_variante_02
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: pont2_diffuse
+    second: {fileID: 2800000, guid: e0d94723c03fda24581bbc4b993fbcf1, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: pont2_normal
+    second: {fileID: 2800000, guid: 6354d6169ae4f3d4b9e39c30e29fb811, type: 3}
   materials:
     importMaterials: 1
     materialName: 0

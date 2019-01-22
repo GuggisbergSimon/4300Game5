@@ -1,5 +1,7 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.Rendering.PostProcessing;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -9,7 +11,9 @@ public class GameManager : MonoBehaviour
 	public static GameManager Instance { get; private set; }
 	private PlayerController player;
 	[SerializeField] private GameObject deathPanel = null;
+	[SerializeField] private GameObject deathPanelButton = null;
 	[SerializeField] private GameObject endPanel = null;
+	[SerializeField] private GameObject endPanelButton = null;
 	[SerializeField] private GameObject darkPanel = null;
 	[SerializeField] private GameObject postProcessVolumeDof = null;
 	[SerializeField] private float timeVisualEffectOnOff = 2.0f;
@@ -78,6 +82,7 @@ public class GameManager : MonoBehaviour
 	{
 		player.Die();
 		deathPanel.SetActive(true);
+		EventSystem.current.SetSelectedGameObject(deathPanelButton);
 	}
 
 	public void EndGame()
@@ -85,6 +90,7 @@ public class GameManager : MonoBehaviour
 		StartCoroutine(player.StopMoving());
 		StartCoroutine(FadeToBlack(timeVisualEffectOnOff));
 		endPanel.SetActive(true);
+		EventSystem.current.SetSelectedGameObject(endPanelButton);
 	}
 
 	public IEnumerator FadeToBlack(float time)

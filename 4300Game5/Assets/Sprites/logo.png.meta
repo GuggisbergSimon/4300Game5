@@ -1,8 +1,7 @@
 fileFormatVersion: 2
-guid: d9ae7860705b9b64d9f802b5f0e3e4d8
+guid: a608603017e45394ebcf57e05fdf5bcb
 TextureImporter:
-  fileIDToRecycleName:
-    21300000: yomi kanji_verti_4
+  fileIDToRecycleName: {}
   externalObjects: {}
   serializedVersion: 7
   mipmaps:
@@ -41,7 +40,7 @@ TextureImporter:
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
-  spriteMode: 2
+  spriteMode: 1
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
@@ -94,31 +93,11 @@ TextureImporter:
     androidETC2FallbackOverride: 0
   spriteSheet:
     serializedVersion: 2
-    sprites:
-    - serializedVersion: 2
-      name: yomi kanji_verti_4
-      rect:
-        serializedVersion: 2
-        x: 0
-        y: 706
-        width: 649
-        height: 1342
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 88854062b695de7428d09971caddff9f
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
+    sprites: []
     outline: []
     physicsShape: []
     bones: []
-    spriteID: da4316bbd10a16d45a438d29c7d1e824
+    spriteID: 
     vertices: []
     indices: 
     edges: []

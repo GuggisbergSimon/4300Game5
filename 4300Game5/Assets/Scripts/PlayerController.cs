@@ -8,6 +8,7 @@ public class PlayerController : MonoBehaviour
 	[SerializeField] private float speedForward = 5.0f;
 	[SerializeField] private float speedLateral = 5.0f;
 	[SerializeField] private float speedDestabilizing = 0.3f;
+	[SerializeField] private float speedRotation = 2.0f;
 	[SerializeField] private float timeStopMoving = 2.0f;
 	[SerializeField] private float timeFadingToBlack = 3.0f;
 	[SerializeField] private float minForceRandom = 0.1f;
@@ -74,7 +75,8 @@ public class PlayerController : MonoBehaviour
 		}
 		else if (enableCinematicMode)
 		{
-			myRigidBody.velocity = transform.right * speedLateral * horizontalInput + transform.forward * speedForward * verticalInput;
+			myRigidBody.velocity = transform.right * speedLateral * horizontalInput +
+			                       transform.forward * speedForward * verticalInput;
 		}
 	}
 
@@ -82,13 +84,25 @@ public class PlayerController : MonoBehaviour
 	{
 		if (canInput)
 		{
-			horizontalInput = Input.GetAxis("Horizontal");
-			verticalInput = Input.GetAxis("Vertical");
-		}
-		else if (enableCinematicMode)
-		{
-			horizontalInput = Input.GetAxis("Horizontal");
-			verticalInput = Input.GetAxis("Vertical");
+			if (enableCinematicMode)
+			{
+				if (Input.GetKey(KeyCode.X))
+				{
+					Debug.Log("test");
+					transform.Rotate(Vector3.up, speedRotation * Input.GetAxis("Horizontal") * Time.deltaTime);
+					transform.Rotate(Vector3.left, speedRotation * Input.GetAxis("Vertical") * Time.deltaTime);
+				}
+				else
+				{
+					horizontalInput = Input.GetAxis("Horizontal");
+					verticalInput = Input.GetAxis("Vertical");
+				}
+			}
+			else
+			{
+				horizontalInput = Input.GetAxis("Horizontal");
+				verticalInput = Input.GetAxis("Vertical");
+			}
 		}
 	}
 
@@ -106,7 +120,7 @@ public class PlayerController : MonoBehaviour
 		{
 			isTouching.Remove(other);
 			if (isTouching.Count == 0 && other.gameObject.CompareTag("Ground") &&
-				Mathf.Abs(myRigidBody.velocity.y) > 0.001f && !enableCinematicMode)
+			    Mathf.Abs(myRigidBody.velocity.y) > 0.001f && !enableCinematicMode)
 			{
 				Falling();
 			}
@@ -151,7 +165,7 @@ public class PlayerController : MonoBehaviour
 		}
 
 		myRigidBody.AddForce(Vector3.right * timeOutOfMenu * speedDestabilizing * Mathf.Sign(pos) *
-							 Random.Range(minForceRandom, maxForceRandom));
+		                     Random.Range(minForceRandom, maxForceRandom));
 	}
 
 	public void Die()
@@ -181,7 +195,7 @@ public class PlayerController : MonoBehaviour
 		{
 			timer += Time.deltaTime;
 			transform.position = Vector3.up * transform.position.y + Vector3.forward * transform.position.z +
-								 Vector3.right * Mathf.Lerp(initPos.x, 0.0f, timer / timeStopMoving);
+			                     Vector3.right * Mathf.Lerp(initPos.x, 0.0f, timer / timeStopMoving);
 			speedForward = Mathf.Lerp(initSpeed, 0.0f, timer / timeStopMoving);
 			yield return null;
 		}

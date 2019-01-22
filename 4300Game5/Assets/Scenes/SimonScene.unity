@@ -8101,6 +8101,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: dab0bab4e8135e34b9c121edf03c0f1d, type: 3}
+--- !u!1 &4284938920118038935 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4284938920118038935, guid: 7e2b948f0aa4f08428b5db304260e826,
+    type: 3}
+  m_PrefabInstance: {fileID: 3285842050196042557}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &4324139106804994951 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 4324139106804994951, guid: 7e2b948f0aa4f08428b5db304260e826,
@@ -8228,6 +8234,16 @@ PrefabInstance:
       propertyPath: postProcessVolumeDof
       value: 
       objectReference: {fileID: 808326455}
+    - target: {fileID: 5206169660311953241, guid: d1f35f1dc7fb8724a8937dd42d044858,
+        type: 3}
+      propertyPath: deathPanelButton
+      value: 
+      objectReference: {fileID: 9117431436441839290}
+    - target: {fileID: 5206169660311953241, guid: d1f35f1dc7fb8724a8937dd42d044858,
+        type: 3}
+      propertyPath: endPanelButton
+      value: 
+      objectReference: {fileID: 4284938920118038935}
     - target: {fileID: 4954390663490318645, guid: d1f35f1dc7fb8724a8937dd42d044858,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -8406,3 +8422,9 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5c125727428625b49a5881f9897199a3, type: 3}
+--- !u!1 &9117431436441839290 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 9117431436441839290, guid: 7e2b948f0aa4f08428b5db304260e826,
+    type: 3}
+  m_PrefabInstance: {fileID: 3285842050196042557}
+  m_PrefabAsset: {fileID: 0}

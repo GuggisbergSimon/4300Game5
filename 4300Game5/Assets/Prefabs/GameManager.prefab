@@ -48,7 +48,7 @@ MonoBehaviour:
   endPanel: {fileID: 0}
   darkPanel: {fileID: 0}
   postProcessVolumeDof: {fileID: 0}
-  timeDofOff: 2
+  timeVisualEffectOnOff: 2
 --- !u!114 &8385094285691656018
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -62,3 +62,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   pausePanel: {fileID: 0}
+  firstButtonSelectedInPause: {fileID: 0}

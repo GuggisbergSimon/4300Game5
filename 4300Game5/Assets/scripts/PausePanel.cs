@@ -1,28 +1,31 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.SceneManagement;
 
 public class PausePanel : MonoBehaviour
 {
-    [SerializeField] private GameObject pausePanel;
+    [SerializeField] private GameObject pausePanel = null;
+    [SerializeField] private GameObject firstButtonSelectedInPause = null;
 
-    // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetKeyDown(KeyCode.P))
         {
             Toggle();
         }
     }
 
-    public void Toggle() // marche pour le bouton "continue"
+    public void Toggle()
     {
-        pausePanel.SetActive(!pausePanel.activeSelf); //plus simple pour basculer d'un état à l'autre
+        pausePanel.SetActive(!pausePanel.activeSelf);
 
         if (pausePanel.activeSelf)
         {
             Time.timeScale = 0f;
+            EventSystem.current.SetSelectedGameObject(null);
+            EventSystem.current.SetSelectedGameObject(firstButtonSelectedInPause);
         }
         else
         {

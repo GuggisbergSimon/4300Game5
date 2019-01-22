@@ -5,11 +5,25 @@ ModelImporter:
   fileIDToRecycleName:
     100000: //RootNode
     400000: //RootNode
-    2100000: No Name
+    2100000: 'Material #5'
+    2100002: 'Material #7'
+    2100004: 'Material #6'
     2300000: //RootNode
     3300000: //RootNode
     4300000: pont_variante_03
-  externalObjects: {}
+    7400000: Take 001
+    9500000: //RootNode
+  externalObjects:
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: pont3_diffuse
+    second: {fileID: 2800000, guid: cdfc7f0bd4c743a458a2cbcceadbc981, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: pont3_normal
+    second: {fileID: 2800000, guid: b5d42d8d57613f3429bf97711654bfad, type: 3}
   materials:
     importMaterials: 1
     materialName: 0
@@ -61,8 +75,8 @@ ModelImporter:
     secondaryUVHardAngle: 88
     secondaryUVPackMargin: 4
     useFileScale: 1
-    previousCalculatedGlobalScale: 1
-    hasPreviousCalculatedGlobalScale: 0
+    previousCalculatedGlobalScale: 0.0254
+    hasPreviousCalculatedGlobalScale: 1
   tangentSpace:
     normalSmoothAngle: 60
     normalImportMode: 0
@@ -89,7 +103,7 @@ ModelImporter:
     hasExtraRoot: 0
     skeletonHasParents: 1
   lastHumanDescriptionAvatarSource: {instanceID: 0}
-  animationType: 0
+  animationType: 2
   humanoidOversampling: 1
   additionalBone: 0
   userData: 

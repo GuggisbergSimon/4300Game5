@@ -5,11 +5,16 @@ ModelImporter:
   fileIDToRecycleName:
     100000: //RootNode
     400000: //RootNode
-    2100000: No Name
+    2100000: pilier_ext
     2300000: //RootNode
     3300000: //RootNode
     4300000: pilier_extension
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: pilier_diffuse
+    second: {fileID: 2800000, guid: 6d7ed13548251b1488e2aa816c775197, type: 3}
   materials:
     importMaterials: 1
     materialName: 0

@@ -15,8 +15,10 @@ public class PlayerController : MonoBehaviour
 	[SerializeField] private AudioClip[] stepSounds = null;
 	[SerializeField] private AudioClip fallingSound = null;
 	[SerializeField] private AudioClip[] splatSounds = null;
+	[SerializeField] private bool enableCinematicMode = false;
 	private GameObject ground;
 	private float horizontalInput = 0.0f;
+	private float verticalInput = 0.0f;
 	private bool isAlive = true;
 	private bool canMove = false;
 	private bool canInput = true;
@@ -57,9 +59,9 @@ public class PlayerController : MonoBehaviour
 
 	private void FixedUpdate()
 	{
-		if (canMove)
+		if (canMove && !enableCinematicMode)
 		{
-			if (!myTriggerDetector.isTouchingAnything())
+			if (!myTriggerDetector.isTouchingAnything() && !enableCinematicMode)
 			{
 				Falling();
 				return;
@@ -70,6 +72,10 @@ public class PlayerController : MonoBehaviour
 			timeOutOfMenu += Time.deltaTime;
 			Destabilize();
 		}
+		else if (enableCinematicMode)
+		{
+			myRigidBody.velocity = transform.right * speedLateral * horizontalInput + transform.forward * speedForward * verticalInput;
+		}
 	}
 
 	void Update()
@@ -77,6 +83,12 @@ public class PlayerController : MonoBehaviour
 		if (canInput)
 		{
 			horizontalInput = Input.GetAxis("Horizontal");
+			verticalInput = Input.GetAxis("Vertical");
+		}
+		else if (enableCinematicMode)
+		{
+			horizontalInput = Input.GetAxis("Horizontal");
+			verticalInput = Input.GetAxis("Vertical");
 		}
 	}
 
@@ -94,7 +106,7 @@ public class PlayerController : MonoBehaviour
 		{
 			isTouching.Remove(other);
 			if (isTouching.Count == 0 && other.gameObject.CompareTag("Ground") &&
-				Mathf.Abs(myRigidBody.velocity.y) > 0.001f)
+				Mathf.Abs(myRigidBody.velocity.y) > 0.001f && !enableCinematicMode)
 			{
 				Falling();
 			}

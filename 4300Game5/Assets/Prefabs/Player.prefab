@@ -460,7 +460,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speedForward: 1
-  speedLateral: 5
+  speedLateral: 3
   speedDestabilizing: 0.3
   timeStopMoving: 2
   timeFadingToBlack: 3
@@ -478,6 +478,7 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 3151badcea109164c93b8e818d47bab3, type: 3}
   - {fileID: 8300000, guid: 59c2a5726de72dd4d84bfdab02857263, type: 3}
   - {fileID: 8300000, guid: 687d59ea61da4284ca6e0ce630203ded, type: 3}
+  enableCinematicMode: 0
 --- !u!33 &1323892020743130036
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -679,6 +680,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1323892020743130026}
     m_Modifications:
+    - target: {fileID: 2955585172500882463, guid: 5e6cb338aaf4cb2458d494e7c3e26d3c,
+        type: 3}
+      propertyPath: m_Name
+      value: Main Camera
+      objectReference: {fileID: 0}
     - target: {fileID: 2955585172500882460, guid: 5e6cb338aaf4cb2458d494e7c3e26d3c,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -733,11 +739,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2955585172500882463, guid: 5e6cb338aaf4cb2458d494e7c3e26d3c,
-        type: 3}
-      propertyPath: m_Name
-      value: Main Camera
       objectReference: {fileID: 0}
     - target: {fileID: 2955585172500882461, guid: 5e6cb338aaf4cb2458d494e7c3e26d3c,
         type: 3}
